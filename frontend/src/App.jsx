@@ -1,14 +1,55 @@
-import React from 'react';
-import AppRouter from './features/excel/routes/AppRouter';
+import React, { useState } from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+
+import AuthRoutes from './features/auth/routes/AppRouter';
+import ExcelRouter from './features/excel/routes/AppRouter';
+import UsuariosRouter from './features/usuarios/routes/AppRouter';
 import MainLayout from './features/excel/components/layout';
-import { BrowserRouter } from 'react-router-dom';
 
 function App() {
+  const [isAuth, setIsAuth] = useState(!!localStorage.getItem('token'));
+
+  const handleLoginSuccess = () => setIsAuth(true);
+  
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    setIsAuth(false);
+  };
+
   return (
     <BrowserRouter>
-    <MainLayout>
-      <AppRouter />
-    </MainLayout>
+      <Routes>
+        {/* Rutas de autenticación (SIN layout) */}
+        <Route 
+          path="/auth/*" 
+          element={
+            isAuth ? (
+              <Navigate to="/excel" replace />
+            ) : (
+              <AuthRoutes onLoginSuccess={handleLoginSuccess} />
+            )
+          } 
+        />
+
+        {/* Rutas protegidas CON layout compartido */}
+        <Route 
+          path="/*" 
+          element={
+            isAuth ? (
+              <MainLayout onLogout={handleLogout}>
+                <Routes>
+                  <Route path="/excel/*" element={<ExcelRouter />} />
+                  <Route path="/usuarios/*" element={<UsuariosRouter />} />
+                  <Route path="/" element={<Navigate to="/excel" replace />} />
+                  <Route path="*" element={<Navigate to="/excel" replace />} />
+                </Routes>
+              </MainLayout>
+            ) : (
+              <Navigate to="/auth/login" replace />
+            )
+          } 
+        />
+      </Routes>
     </BrowserRouter>
   );
 }

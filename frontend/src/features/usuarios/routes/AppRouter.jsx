@@ -1,15 +1,16 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import ExcelPage from '../pages/ExcelPage';
+import UsersPage from '../pages/UsuariosPage';
 
 const AppRouter = () => {
   return (
     <Routes>
-      {/* Ruta principal del módulo Excel */}
-      <Route path="/" element={<ExcelPage />} />
+      {/* Ruta principal del módulo Usuarios */}
+      <Route path="/" element={<UsersPage />} />
       
       {/* Otras rutas del módulo si las necesitas */}
-      {/* <Route path="/detalle" element={<ExcelDetallePage />} /> */}
+      {/* <Route path="/crear" element={<CrearUsuarioPage />} /> */}
+      {/* <Route path="/:id" element={<DetalleUsuarioPage />} /> */}
       
       {/* Ruta por defecto */}
       <Route path="*" element={<Navigate to="/" replace />} />
