@@ -5,12 +5,17 @@ import authRoutes from './src/api/routes/v1/authRoutes.js';
 
 const app = express();
 
+// 1. Configuración de CORS ultra-compatible
 app.use(cors({
-    origin: '*', 
+    origin: '*', // Permite cualquier origen temporalmente para debug
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
+    credentials: true,
+    preflightContinue: false,
+    optionsSuccessStatus: 204
 }));
+
+app.options('*', cors());
 
 app.use(express.json());
 
