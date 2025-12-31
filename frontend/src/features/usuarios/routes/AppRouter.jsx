@@ -8,7 +8,7 @@ const AppRouter = () => {
       {/* Ruta principal del módulo Usuarios */}
       <Route path="/" element={<UsersPage />} />
       
-      {/* Otras rutas del módulo si las necesitas */}
+      {/* Otras rutas del módulo si las necesitas xd*/}
       {/* <Route path="/crear" element={<CrearUsuarioPage />} /> */}
       {/* <Route path="/:id" element={<DetalleUsuarioPage />} /> */}
       

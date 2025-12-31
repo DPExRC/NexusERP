@@ -33,8 +33,8 @@ app.use(cors({
 app.use(express.json());
 
 // --- RUTAS ---
-app.use('/api/v1/auth', authRoutes);
-app.use('/api/v1/excel', verificarToken, excelRoutes);
+app.use('/v1/auth', authRoutes);
+app.use('/v1/excel', verificarToken, excelRoutes);
 
 app.listen(PORT, () => {
   console.log(`🚀 Servidor listo en http://localhost:${PORT}`);
