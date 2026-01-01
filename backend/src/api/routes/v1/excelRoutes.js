@@ -13,7 +13,7 @@ const upload = multer({ storage: multer.memoryStorage() });
 router.get('/get-excel', async (req, res) => {
   try {
     // Obtenemos el registro más reciente basado en el ID
-    const result = await pool.query('SELECT datos FROM excel_data ORDER BY id DESC LIMIT 1');
+    const result = await pool.query('SELECT datos FROM excel_data ');
     
     if (result.rows.length === 0) {
       return res.json({ data: [], headers: [] });
@@ -79,7 +79,7 @@ router.post('/update-excel', async (req, res) => {
 
   try {
     // Buscamos el último archivo trabajado
-    const result = await pool.query('SELECT nombre_archivo, datos FROM excel_data ORDER BY id DESC LIMIT 1');
+    const result = await pool.query('SELECT nombre_archivo, datos FROM excel_data');
     
     if (result.rows.length === 0) {
       return res.status(404).json({ error: "No hay datos para actualizar" });

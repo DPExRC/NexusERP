@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
-import AuthRoutes from './features/auth/routes/AppRouter';
-import ExcelRouter from './features/excel/routes/AppRouter';
-import UsuariosRouter from './features/usuarios/routes/AppRouter';
-import MainLayout from './features/excel/components/layout';
+import AuthRoutes from '@features/auth/routes/AppRouter';
+import ExcelRouter from '@features/excel/routes/AppRouter';
+import UsuariosRouter from '@features/usuarios/routes/AppRouter';
+import MainLayout from '@shared/components/layout/layout';
 
 function App() {
   const [isAuth, setIsAuth] = useState(!!localStorage.getItem('token'));
